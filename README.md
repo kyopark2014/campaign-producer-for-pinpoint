@@ -17,7 +17,25 @@ AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니�
 4. PinPoint는 텍스트 메시지를 이메일로 전달합니다. 
 
 
-## API 정보
+### CDK로 시험
+
+테스트를 위해 CDK 시험 환경을 구성하였습니다. 인프라 설치시 아래의 명령어 를 사용합니다. 
+[실행] 
+
+```c
+$ cdk deploy
+```
+
+테스트후 인프라 삭제시는 아래 명령어를 사용합니다. 
+
+[삭제]
+```c
+$ cdk destroy
+```
+
+API Gateway에서 500에러 발생시 [Troubleshoot](https://github.com/kyopark2014/serverless-storytime/blob/main/docs/cdk.md)를 참조하여 API Gateway에서 Lambda Permission을 재설정합니다.
+
+### API 정보
 
 Lamda에 PinPoint Permission을 포함합니다. 
 
@@ -106,6 +124,13 @@ PinPoint로 메시지를 전송합니다.
         }
     });
 ```
+
+### Prerequisite
+
+사전에 테스트할 이메일 주소를 PinPoint에서 등록하여 아래와 같이 confirm 하여야 합니다.
+
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/52392004/159303803-ef2c064e-f86d-4fb9-a57a-ebab3365f7fa.png">
+
 
 
 ### 테스트 방법
