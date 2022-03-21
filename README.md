@@ -22,7 +22,7 @@ AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니�
 Lamda에 PinPoint Permission을 포함합니다. 
 
 ```java
-		    {
+	{
             "Effect": "Allow",
             "Action": [
                 "mobiletargeting:*"
