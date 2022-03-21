@@ -1,0 +1,1086 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.91"
+        }
+      },
+      "CampaignProducerForPinpointStack": {
+        "id": "CampaignProducerForPinpointStack",
+        "path": "CampaignProducerForPinpointStack",
+        "children": {
+          "s3-campaign": {
+            "id": "s3-campaign",
+            "path": "CampaignProducerForPinpointStack/s3-campaign",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/s3-campaign/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "aws-cdk:auto-delete-objects",
+                        "value": "true"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.17.0"
+                }
+              },
+              "Policy": {
+                "id": "Policy",
+                "path": "CampaignProducerForPinpointStack/s3-campaign/Policy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CampaignProducerForPinpointStack/s3-campaign/Policy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "bucket": {
+                          "Ref": "s3campaign7A55F37C"
+                        },
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "s3:GetBucket*",
+                                "s3:List*",
+                                "s3:DeleteObject*"
+                              ],
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": {
+                                  "Fn::GetAtt": [
+                                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                                    "Arn"
+                                  ]
+                                }
+                              },
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "s3campaign7A55F37C",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "s3campaign7A55F37C",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Action": "s3:GetObject",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "CanonicalUser": {
+                                  "Fn::GetAtt": [
+                                    "CampaignOrigin1S3Origin0E89EDE3",
+                                    "S3CanonicalUserId"
+                                  ]
+                                }
+                              },
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "s3campaign7A55F37C",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                  "version": "2.17.0"
+                }
+              },
+              "AutoDeleteObjectsCustomResource": {
+                "id": "AutoDeleteObjectsCustomResource",
+                "path": "CampaignProducerForPinpointStack/s3-campaign/AutoDeleteObjectsCustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "CampaignProducerForPinpointStack/s3-campaign/AutoDeleteObjectsCustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.17.0"
+            }
+          },
+          "Custom::S3AutoDeleteObjectsCustomResourceProvider": {
+            "id": "Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "path": "CampaignProducerForPinpointStack/Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "CampaignProducerForPinpointStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.17.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "CampaignProducerForPinpointStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.17.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "CampaignProducerForPinpointStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.17.0"
+            }
+          },
+          "bucketName": {
+            "id": "bucketName",
+            "path": "CampaignProducerForPinpointStack/bucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "Campaign": {
+            "id": "Campaign",
+            "path": "CampaignProducerForPinpointStack/Campaign",
+            "children": {
+              "Origin1": {
+                "id": "Origin1",
+                "path": "CampaignProducerForPinpointStack/Campaign/Origin1",
+                "children": {
+                  "S3Origin": {
+                    "id": "S3Origin",
+                    "path": "CampaignProducerForPinpointStack/Campaign/Origin1/S3Origin",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CampaignProducerForPinpointStack/Campaign/Origin1/S3Origin/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+                          "aws:cdk:cloudformation:props": {
+                            "cloudFrontOriginAccessIdentityConfig": {
+                              "comment": "Identity for CampaignProducerForPinpointStackCampaignOrigin1BC535543"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudfront.CfnCloudFrontOriginAccessIdentity",
+                          "version": "2.17.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.OriginAccessIdentity",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.91"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/Campaign/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                  "aws:cdk:cloudformation:props": {
+                    "distributionConfig": {
+                      "enabled": true,
+                      "origins": [
+                        {
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "s3campaign7A55F37C",
+                              "RegionalDomainName"
+                            ]
+                          },
+                          "id": "CampaignProducerForPinpointStackCampaignOrigin1BC535543",
+                          "s3OriginConfig": {
+                            "originAccessIdentity": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "origin-access-identity/cloudfront/",
+                                  {
+                                    "Ref": "CampaignOrigin1S3Origin0E89EDE3"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      ],
+                      "defaultCacheBehavior": {
+                        "pathPattern": "*",
+                        "targetOriginId": "CampaignProducerForPinpointStackCampaignOrigin1BC535543",
+                        "allowedMethods": [
+                          "GET",
+                          "HEAD",
+                          "OPTIONS",
+                          "PUT",
+                          "PATCH",
+                          "POST",
+                          "DELETE"
+                        ],
+                        "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                        "compress": true,
+                        "viewerProtocolPolicy": "redirect-to-https"
+                      },
+                      "httpVersion": "http2",
+                      "ipv6Enabled": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+              "version": "2.17.0"
+            }
+          },
+          "distributionDomainName": {
+            "id": "distributionDomainName",
+            "path": "CampaignProducerForPinpointStack/distributionDomainName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "LambdaUpload": {
+            "id": "LambdaUpload",
+            "path": "CampaignProducerForPinpointStack/LambdaUpload",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.17.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:DeleteObject*",
+                                    "s3:PutObject",
+                                    "s3:PutObjectLegalHold",
+                                    "s3:PutObjectRetention",
+                                    "s3:PutObjectTagging",
+                                    "s3:PutObjectVersionTagging",
+                                    "s3:Abort*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "s3campaign7A55F37C",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "s3campaign7A55F37C",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "LambdaUploadServiceRoleDefaultPolicy04187ED8",
+                            "roles": [
+                              {
+                                "Ref": "LambdaUploadServiceRole0D555F8C"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.17.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.17.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "CampaignProducerForPinpointStack/LambdaUpload/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "CampaignProducerForPinpointStack/LambdaUpload/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.17.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "CampaignProducerForPinpointStack/LambdaUpload/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.17.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/LambdaUpload/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "9d8b694e9c5e59b346090a3cbdae3f35d6c33a776f922045747de6c0522078bd.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "LambdaUploadServiceRole0D555F8C",
+                        "Arn"
+                      ]
+                    },
+                    "environment": {
+                      "variables": {
+                        "bucket": {
+                          "Ref": "s3campaign7A55F37C"
+                        },
+                        "CDN": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "https://",
+                              {
+                                "Fn::GetAtt": [
+                                  "CampaignBB1DC5FF",
+                                  "DomainName"
+                                ]
+                              },
+                              "/"
+                            ]
+                          ]
+                        },
+                        "appId": "c241670f34f14558b6ce2fc64c926096"
+                      }
+                    },
+                    "handler": "index.handler",
+                    "runtime": "nodejs14.x",
+                    "timeout": 10
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.17.0"
+                }
+              },
+              "InvokeServicePrincipal(apigateway.amazonaws.com)": {
+                "id": "InvokeServicePrincipal(apigateway.amazonaws.com)",
+                "path": "CampaignProducerForPinpointStack/LambdaUpload/InvokeServicePrincipal(apigateway.amazonaws.com)",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "LambdaUploadB8A525B6",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "apigateway.amazonaws.com"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-policy": {
+            "id": "pinpoint-policy",
+            "path": "CampaignProducerForPinpointStack/pinpoint-policy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/pinpoint-policy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "mobileanalytics:*",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "pinpointpolicy1DA39CD6",
+                    "roles": [
+                      {
+                        "Ref": "LambdaUploadServiceRole0D555F8C"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "version": "2.17.0"
+            }
+          },
+          "AccessLogs": {
+            "id": "AccessLogs",
+            "path": "CampaignProducerForPinpointStack/AccessLogs",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/AccessLogs/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "retentionInDays": 90
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                  "version": "2.17.0"
+                }
+              },
+              "Policy": {
+                "id": "Policy",
+                "path": "CampaignProducerForPinpointStack/AccessLogs/Policy",
+                "children": {
+                  "ResourcePolicy": {
+                    "id": "ResourcePolicy",
+                    "path": "CampaignProducerForPinpointStack/AccessLogs/Policy/ResourcePolicy",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Logs::ResourcePolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "{\"Statement\":[{\"Action\":[\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Resource\":\"",
+                              {
+                                "Fn::GetAtt": [
+                                  "AccessLogs8B620ECA",
+                                  "Arn"
+                                ]
+                              },
+                              "\"}],\"Version\":\"2012-10-17\"}"
+                            ]
+                          ]
+                        },
+                        "policyName": "CampaignProducerForPinpointStackAccessLogsPolicy8742A2C1"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.CfnResourcePolicy",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.ResourcePolicy",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+              "version": "2.17.0"
+            }
+          },
+          "api-pinpoint": {
+            "id": "api-pinpoint",
+            "path": "CampaignProducerForPinpointStack/api-pinpoint",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "binaryMediaTypes": [
+                      "*/*"
+                    ],
+                    "description": "API Gateway",
+                    "endpointConfiguration": {
+                      "types": [
+                        "REGIONAL"
+                      ]
+                    },
+                    "name": "api-pinpoint",
+                    "policy": {
+                      "Statement": [
+                        {
+                          "Action": "execute-api:Invoke",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "AWS": "*"
+                          },
+                          "Resource": "execute-api:/*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.17.0"
+                }
+              },
+              "CloudWatchRole": {
+                "id": "CloudWatchRole",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/CloudWatchRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CampaignProducerForPinpointStack/api-pinpoint/CloudWatchRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.17.0"
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "apipinpointCloudWatchRole8AFFB266",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnAccount",
+                  "version": "2.17.0"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CampaignProducerForPinpointStack/api-pinpoint/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "apipinpointBD9D5E8F"
+                        },
+                        "description": "Automatically created by the RestApi construct"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.17.0"
+                }
+              },
+              "DeploymentStage.dev": {
+                "id": "DeploymentStage.dev",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/DeploymentStage.dev",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CampaignProducerForPinpointStack/api-pinpoint/DeploymentStage.dev/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "restApiId": {
+                          "Ref": "apipinpointBD9D5E8F"
+                        },
+                        "accessLogSetting": {
+                          "destinationArn": {
+                            "Fn::GetAtt": [
+                              "AccessLogs8B620ECA",
+                              "Arn"
+                            ]
+                          },
+                          "format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
+                        },
+                        "deploymentId": {
+                          "Ref": "apipinpointDeployment2F246AF75dff1f33ef96f12fc8379c8a058a1bd5"
+                        },
+                        "stageName": "dev"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.17.0"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.17.0"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "CampaignProducerForPinpointStack/api-pinpoint/Default",
+                "children": {
+                  "putCampaign": {
+                    "id": "putCampaign",
+                    "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "apipinpointBD9D5E8F",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "putCampaign",
+                            "restApiId": {
+                              "Ref": "apipinpointBD9D5E8F"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.17.0"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign/POST",
+                        "children": {
+                          "ApiPermission.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign": {
+                            "id": "ApiPermission.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign",
+                            "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign/POST/ApiPermission.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "LambdaUploadB8A525B6",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "apipinpointBD9D5E8F"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "apipinpointDeploymentStagedevA202E2D7"
+                                      },
+                                      "/POST/putCampaign"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.17.0"
+                            }
+                          },
+                          "ApiPermission.Test.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign": {
+                            "id": "ApiPermission.Test.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign",
+                            "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign/POST/ApiPermission.Test.CampaignProducerForPinpointStackapipinpoint024393B7.POST..putCampaign",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "LambdaUploadB8A525B6",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "apipinpointBD9D5E8F"
+                                      },
+                                      "/test-invoke-stage/POST/putCampaign"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.17.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "CampaignProducerForPinpointStack/api-pinpoint/Default/putCampaign/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "POST",
+                                "resourceId": {
+                                  "Ref": "apipinpointputCampaign4C91A99E"
+                                },
+                                "restApiId": {
+                                  "Ref": "apipinpointBD9D5E8F"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "LambdaUploadB8A525B6",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST",
+                                  "requestTemplates": {
+                                    "image/jpeg": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }",
+                                    "image/jpg": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }",
+                                    "application/octet-stream": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }",
+                                    "image/png": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }",
+                                    "application/json": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }"
+                                  },
+                                  "integrationResponses": [
+                                    {
+                                      "statusCode": "200"
+                                    }
+                                  ]
+                                },
+                                "methodResponses": [
+                                  {
+                                    "statusCode": "200",
+                                    "responseModels": {
+                                      "application/json": "Empty"
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.17.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.17.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+              "version": "2.17.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CampaignProducerForPinpointStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CampaignProducerForPinpointStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.17.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CampaignProducerForPinpointStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.91"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.17.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.17.0"
+    }
+  }
+}
