@@ -1,8 +1,6 @@
 # Campaign Producer using PinPoint
 
-AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 여기에서는 AWS PinPoint를 이용하여 이메일 알림을 보내는것을 구현하고자 합니다. 
-
-전체 Architecture는 아래와 같습니다. 
+AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 여기에서는 AWS PinPoint를 이용하여 이메일 알림을 보내는것을 구현하고자 합니다. 전체 Architecture는 아래와 같습니다. 
 
 <img width="586" alt="image" src="https://user-images.githubusercontent.com/52392004/159288376-d42cc6c2-5dc4-4662-b205-f08b5ace8782.png">
 
@@ -19,7 +17,7 @@ AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니�
 
 ### CDK 개발 환경 
 
-테스트를 위해 CDK 시험 환경을 구성하였습니다. 인프라 설치시 아래의 명령어를 사용합니다. 
+인프라 설치 및 삭제를 위하여 CDK 개발 환경을 구성하였습니다. 인프라 설치시 아래의 명령어를 사용합니다. 
 
 [실행] 
 
