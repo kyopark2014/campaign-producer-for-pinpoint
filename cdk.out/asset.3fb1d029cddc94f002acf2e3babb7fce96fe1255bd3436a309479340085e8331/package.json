@@ -1,0 +1,25 @@
+{
+  "name": "lambda-producer",
+  "version": "1.0.0",
+  "description": "It is a lamda function for producer with pinpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyopark2014/lambda-producer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyopark2014/lambda-producer/issues"
+  },
+  "homepage": "https://github.com/kyopark2014/lambda-producer#readme",
+  "dependencies": {
+    "content-disposition": "^0.5.4",
+    "path": "^0.12.7",
+    "uuid": "^8.3.2"
+  }
+}

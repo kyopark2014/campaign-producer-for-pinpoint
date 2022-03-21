@@ -472,7 +472,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "758966ec9d5f70964dec08d3878321fd8537209967f532b39912a43005d2bc77.zip"
+                      "s3Key": "3fb1d029cddc94f002acf2e3babb7fce96fe1255bd3436a309479340085e8331.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -500,7 +500,7 @@
                             ]
                           ]
                         },
-                        "appId": "2da32e1e303b413da8d58d923f4b24c2"
+                        "appId": "55051dd1160441c6b0fb74e358017939"
                       }
                     },
                     "handler": "index.handler",
@@ -553,7 +553,7 @@
                     "policyDocument": {
                       "Statement": [
                         {
-                          "Action": "mobileanalytics:*",
+                          "Action": "mobiletargeting:*",
                           "Effect": "Allow",
                           "Resource": "*"
                         }

@@ -55,14 +55,14 @@ export class CampaignProducerUsingPinpointStack extends Stack {
       environment: {
         bucket: s3Bucket.bucketName,
         CDN: 'https://'+distribution.domainName+'/',
-        appId: '2da32e1e303b413da8d58d923f4b24c2'  // Project ID
+        appId: '55051dd1160441c6b0fb74e358017939'  // Project ID
       }
     });  
     s3Bucket.grantReadWrite(lambdaProducer);
 
     // create a pinpoint statement
     const pinpointPolicy = new iam.PolicyStatement({
-      actions: ['mobileanalytics:*'],
+      actions: ['mobiletargeting:*'],
       resources: ['*'],
     });
     // add the policy to the Function's role
