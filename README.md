@@ -1,6 +1,6 @@
 # Campaign Producer using PinPoint
 
-AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 현재 국내에서는 SMS 알림을 제공하지 않으므로 PinPoint를 이용하여 이메일 알림을 보내는것을 Amazon PinPoint를 이용해 구현하고자 합니다. 
+AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 여기에서는 AWS PinPoint를 이용하여 이메일 알림을 보내는것을 구현하고자 합니다. 
 
 전체 Architecture는 아래와 같습니다. 
 
