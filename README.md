@@ -10,7 +10,7 @@ AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니�
 
 1. 상담원이 전송하려는 텍스트를 입력합니다. 
 
-2. API Gateway를 통해 전달된 메시지는 Lambda를 통해 처리 됩니다. 여기서, Cognito를 이용한 사용자 인증이 가능한데, API를 설명하기 위한 예제이므로 여기서는 제외합니다. 
+2. API Gateway를 통해 전달된 메시지는 Lambda를 Invoke 합니다. 
 
 3. Lambda는 메시지를 PinPoint에 전달합니다. 
 
