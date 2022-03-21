@@ -12,7 +12,7 @@ AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니�
 
 2. API Gateway를 통해 전달된 메시지 이벤트는 Lambda를 Invoke 합니다. 
 
-3. Lambda는 메시지를 PinPoint에 전달합니다. 
+3. Lambda는 메시지를 Parsing PinPoint에 전달합니다. 
 
 4. PinPoint는 텍스트 메시지를 이메일로 전달합니다. 
 
