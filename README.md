@@ -40,7 +40,7 @@ const aws = require('aws-sdk');
 var pinpoint = new aws.Pinpoint();
 ```
 
-pin point에 전달할 parameter에 restful api로 얻어온 값들을 입력합니다. 
+PinPoint에 전달할 parameter에 restful api로 얻어온 값들을 입력합니다. 
 
 ```java
 var pinPointParams = {
@@ -74,7 +74,7 @@ var pinPointParams = {
     };
 ```
 
-pin point로 메시지를 전송합니다. 
+PinPoint로 메시지를 전송합니다. 
 
 ```java
     var msgID, response;
