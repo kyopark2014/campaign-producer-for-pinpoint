@@ -472,7 +472,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "9d8b694e9c5e59b346090a3cbdae3f35d6c33a776f922045747de6c0522078bd.zip"
+                      "s3Key": "758966ec9d5f70964dec08d3878321fd8537209967f532b39912a43005d2bc77.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -500,12 +500,12 @@
                             ]
                           ]
                         },
-                        "appId": "c241670f34f14558b6ce2fc64c926096"
+                        "appId": "2da32e1e303b413da8d58d923f4b24c2"
                       }
                     },
                     "handler": "index.handler",
                     "runtime": "nodejs14.x",
-                    "timeout": 10
+                    "timeout": 30
                   }
                 },
                 "constructInfo": {
@@ -576,6 +576,52 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "version": "2.17.0"
+            }
+          },
+          "PinPointCampaign": {
+            "id": "PinPointCampaign",
+            "path": "CampaignProducerForPinpointStack/PinPointCampaign",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Pinpoint::App",
+              "aws:cdk:cloudformation:props": {
+                "name": "pinpoint-project"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_pinpoint.CfnApp",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-projectID": {
+            "id": "pinpoint-projectID",
+            "path": "CampaignProducerForPinpointStack/pinpoint-projectID",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-logical ID": {
+            "id": "pinpoint-logical ID",
+            "path": "CampaignProducerForPinpointStack/pinpoint-logical ID",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-cfnOptions": {
+            "id": "pinpoint-cfnOptions",
+            "path": "CampaignProducerForPinpointStack/pinpoint-cfnOptions",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-cfnProperties": {
+            "id": "pinpoint-cfnProperties",
+            "path": "CampaignProducerForPinpointStack/pinpoint-cfnProperties",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.17.0"
             }
           },

@@ -9,6 +9,7 @@ const iam = require('aws-cdk-lib/aws-iam');
 const cloudFront = require('aws-cdk-lib/aws-cloudfront');
 const origins = require('aws-cdk-lib/aws-cloudfront-origins');
 const logs = require('aws-cdk-lib/aws-logs');
+const pinpoint = require('aws-cdk-lib/aws-pinpoint');
 
 const stage = "dev";
 
@@ -50,11 +51,11 @@ export class CampaignProducerUsingPinpointStack extends Stack {
       runtime: lambda.Runtime.NODEJS_14_X, 
       code: lambda.Code.fromAsset("repository/lambda-producer"), 
       handler: "index.handler", 
-      timeout: cdk.Duration.seconds(10),
+      timeout: cdk.Duration.seconds(30),
       environment: {
         bucket: s3Bucket.bucketName,
         CDN: 'https://'+distribution.domainName+'/',
-        appId: 'c241670f34f14558b6ce2fc64c926096'  // Project ID
+        appId: '2da32e1e303b413da8d58d923f4b24c2'  // Project ID
       }
     });  
     s3Bucket.grantReadWrite(lambdaProducer);
@@ -70,6 +71,30 @@ export class CampaignProducerUsingPinpointStack extends Stack {
         statements: [pinpointPolicy],
       }),
     );
+
+    const pinpointProject = new pinpoint.CfnApp(this, "PinPointCampaign", {
+      name: "pinpoint-project"
+    });
+
+    new cdk.CfnOutput(this, 'pinpoint-projectID', {
+      value: pinpointProject.attrArn,
+      description: 'The Project ID of the pinpoint',
+    }); 
+
+    new cdk.CfnOutput(this, 'pinpoint-logical ID', {
+      value: pinpointProject.logicalId,
+      description: 'The logical ID of the pinpoint',
+    }); 
+
+    new cdk.CfnOutput(this, 'pinpoint-cfnOptions', {
+      value: JSON.stringify(pinpointProject.cfnOptions),
+      description: 'The cfnOptions of the pinpoint',
+    }); 
+
+    new cdk.CfnOutput(this, 'pinpoint-cfnProperties', {
+      value: JSON.stringify(pinpointProject.cfnProperties),
+      description: 'The cfnProperties of the pinpoint',
+    }); 
 
     // api Gateway
     const logGroup = new logs.LogGroup(this, 'AccessLogs', {
@@ -181,5 +206,9 @@ export class CampaignProducerUsingPinpointStack extends Stack {
         }
       ]
     }); 
+
+
+
+
   }
 }

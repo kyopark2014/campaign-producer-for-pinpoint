@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/00ce28959ec0da5e222a8d1438b433c05b228074281b576e69b123a9aac89fe3.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/db18c5d611cc30dcc68fd1cf06c32e39c120601af42518779246a8e50c05d99d.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -121,6 +121,36 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "pinpointpolicy1DA39CD6"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/PinPointCampaign": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PinPointCampaign"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/pinpoint-projectID": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pinpointprojectID"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/pinpoint-logical ID": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pinpointlogicalID"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/pinpoint-cfnOptions": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pinpointcfnOptions"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/pinpoint-cfnProperties": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pinpointcfnProperties"
           }
         ],
         "/CampaignProducerForPinpointStack/AccessLogs/Resource": [

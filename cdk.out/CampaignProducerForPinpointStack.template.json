@@ -344,7 +344,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "9d8b694e9c5e59b346090a3cbdae3f35d6c33a776f922045747de6c0522078bd.zip"
+          "S3Key": "758966ec9d5f70964dec08d3878321fd8537209967f532b39912a43005d2bc77.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -372,12 +372,12 @@
                 ]
               ]
             },
-            "appId": "c241670f34f14558b6ce2fc64c926096"
+            "appId": "2da32e1e303b413da8d58d923f4b24c2"
           }
         },
         "Handler": "index.handler",
         "Runtime": "nodejs14.x",
-        "Timeout": 10
+        "Timeout": 30
       },
       "DependsOn": [
         "LambdaUploadServiceRoleDefaultPolicy04187ED8",
@@ -385,7 +385,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "CampaignProducerForPinpointStack/LambdaUpload/Resource",
-        "aws:asset:path": "asset.9d8b694e9c5e59b346090a3cbdae3f35d6c33a776f922045747de6c0522078bd",
+        "aws:asset:path": "asset.758966ec9d5f70964dec08d3878321fd8537209967f532b39912a43005d2bc77",
         "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
@@ -428,6 +428,15 @@
       },
       "Metadata": {
         "aws:cdk:path": "CampaignProducerForPinpointStack/pinpoint-policy/Resource"
+      }
+    },
+    "PinPointCampaign": {
+      "Type": "AWS::Pinpoint::App",
+      "Properties": {
+        "Name": "pinpoint-project"
+      },
+      "Metadata": {
+        "aws:cdk:path": "CampaignProducerForPinpointStack/PinPointCampaign"
       }
     },
     "AccessLogs8B620ECA": {
@@ -758,7 +767,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VS227CMAz9lr2H7IKmPUMR06RNIPYBKCSmM7RxFScgVPXfl6RAQdqefGyf2D6OX+Tzm3x6UEceabMfVbiR7bdXei9iaN3yWLbToPfgRbG1Z9SbJVWoT0P47PfOVDF0QlcUzNaR9bKdIXuHm+CRrFg4LNFOtAbmDwPWo8+VivRgnh78x7gt04lK1RujZDsPVufCkXGLl+BqZM5cVLVsV1RBSmQ7KOhRJ3i8VszgWU6SERWVLNtPKt8dhSYxr3gFTMFpGIrcRzqhGiyVh6M6xb7AftLgmXaBUR4F68UMmopOdVSZJQ5e/Ikyz9uDS4e03atz21p8gf8hk0I96jpRBPZU/8m+Ty0dHdCAE1l76oi2TPxF8E3IoxVkDfart2RA7vjxEO/nNV7QjhFHLqrBGuSqt7933URAXQIAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/3VS227CMAz9lr2H7IKmPRcQ06RNIPYBKCSmM7RxFCcgVPXfl7RAQdqefGwfX46TF/n8Jp8e1JFH2uxHFW5k8x2U3osUWjc8ls0k6j0EMd3aM+rNkirUpyF89ntnohhaoSuKZuvJBtnMkIPHTQxIViw8lmgLrYH5w4ANGLpO01wwzwX/MW7btKJS9cYo2cyj1V3jxLjFS/A1MndcVLVsVlRBTnR2UNCjVvB4rZghsCyyEQ6tI0zrJ07hnKioZNl8UvnuKbpcecUrYIpew9D0PtIK5bBUAY7qlPYADoXDM+0Ck1yKNogZuIpOdVLdSR689DJlt38PLhPyta/O7WjxBeGHTA71qG3FNHKg+k/2fWrp6YAGvOhukSeiLTN/EYOL3WpTsgb7p7BkQO748ZD+02v6UTtGHPmkBmuQq97+AiaHv5ttAgAA"
       },
       "Metadata": {
         "aws:cdk:path": "CampaignProducerForPinpointStack/CDKMetadata/Default"
@@ -781,6 +790,27 @@
           "DomainName"
         ]
       }
+    },
+    "pinpointprojectID": {
+      "Description": "The Project ID of the pinpoint",
+      "Value": {
+        "Fn::GetAtt": [
+          "PinPointCampaign",
+          "Arn"
+        ]
+      }
+    },
+    "pinpointlogicalID": {
+      "Description": "The logical ID of the pinpoint",
+      "Value": "PinPointCampaign"
+    },
+    "pinpointcfnOptions": {
+      "Description": "The cfnOptions of the pinpoint",
+      "Value": "{\"metadata\":{\"aws:cdk:path\":\"CampaignProducerForPinpointStack/PinPointCampaign\"}}"
+    },
+    "pinpointcfnProperties": {
+      "Description": "The cfnProperties of the pinpoint",
+      "Value": "{\"name\":\"pinpoint-project\"}"
     },
     "apipinpointEndpointDA3B2EED": {
       "Value": {
