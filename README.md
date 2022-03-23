@@ -145,3 +145,48 @@ Postman으로 API Gateway 주소에 api를 선택합니다. 입력되는 메시�
 정상적으로 발신시 아래와 같이 메시지가 이메일로 전송 됩니다. 
 
 ![image](https://user-images.githubusercontent.com/52392004/159301382-4d8c0896-90c3-4321-b66b-a40cfb5f5fb2.png)
+
+
+### Troubleshooting
+
+CDK에서 Email Channel을 아래와 같이 생성 가능합니다. 그런데 여기서 applicationId를 pinpointProject.attrArn의 뒤쪽 32자를 잘라서 사용하여야 하는데, 이 값은 Token(https://docs.aws.amazon.com/cdk/v2/guide/tokens.html)이라서 pinpoint에서 생성되기 전에는 알 수가 없습니다. 따라서, CDK에서 Email Channel을 아래처처럼 생성하려면 닭이냐 달걀이 먼저냐 하는 식의 문제가 되어 버립니다. 따라서 아래와 같이 CfnEmailChannel로 Email channel을 생성할 수 없습니다.
+
+```java
+    const pinpointProject = new pinpoint.CfnApp(this, "PinPointCampaign", {
+      name: "pinpoint-project"
+    });
+
+    const attrArn = pinpointProject.attrArn;
+    new cdk.CfnOutput(this, 'pinpoint-attrArn', {
+      value: pinpointProject.attrArn,
+      description: 'The attrArn of the pinpoint',
+    });    
+    
+    const cfnEmailChannel = new pinpoint.CfnEmailChannel(this, 'MyCfnEmailChannel', {
+      applicationId: '7a283e241e2a4ea8a8eaf353169fb87c',
+      fromAddress: 'storytimebot21@gmail.com',
+      identity: 'arn:aws:ses:ap-northeast-1:xxxx:identity/storytimebot21@gmail.com',    
+      enabled: true,
+    });
+```    
+
+따라서, CDK로 pinpoint 생성후에 아래처럼 console에서 수동으로 생성합니다. 
+
+1) Pinpoint Console에서 CDK가 생성한 프로젝트로 진입합니다. 여기서는 CDK에서 project명을 "pinpoint-poject"로 입력하였으므로 아래와 같이 "pinpoint-project"가 생성되어 있습니다.
+
+<img width="1380" alt="image" src="https://user-images.githubusercontent.com/52392004/159626575-6ced00ca-059a-4b28-883b-c98b4d5f512f.png">
+
+2) 아래와 같이 [Settings] - [Email]을 선택합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159626848-a38ab9e4-819e-4324-9743-afc5b604e4b7.png)
+
+3) 아래와 같이 [Edit]를 선택합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159626969-d03f9ae9-8f6e-408b-9857-f22840c0d950.png)
+
+4) Identity type을 [Email address]로 선택을 하고 [Default sender address]를 기존에 인증을 완료한 메일 주소를 선택합니다.  이후 아래로 스크롤하여 [Save]를 선택합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159627132-95eeb053-11e7-4a28-a1a4-ca1ac26fbb06.png)
+
+
+
