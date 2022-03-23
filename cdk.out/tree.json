@@ -312,17 +312,39 @@
               "version": "2.17.0"
             }
           },
-          "LambdaUpload": {
-            "id": "LambdaUpload",
-            "path": "CampaignProducerForPinpointStack/LambdaUpload",
+          "PinPointCampaign": {
+            "id": "PinPointCampaign",
+            "path": "CampaignProducerForPinpointStack/PinPointCampaign",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Pinpoint::App",
+              "aws:cdk:cloudformation:props": {
+                "name": "pinpoint-project"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_pinpoint.CfnApp",
+              "version": "2.17.0"
+            }
+          },
+          "pinpoint-attrArn": {
+            "id": "pinpoint-attrArn",
+            "path": "CampaignProducerForPinpointStack/pinpoint-attrArn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
+          "LambdaCampaign": {
+            "id": "LambdaCampaign",
+            "path": "CampaignProducerForPinpointStack/LambdaCampaign",
             "children": {
               "ServiceRole": {
                 "id": "ServiceRole",
-                "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole",
+                "path": "CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/Resource",
+                    "path": "CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                       "aws:cdk:cloudformation:props": {
@@ -361,11 +383,11 @@
                   },
                   "DefaultPolicy": {
                     "id": "DefaultPolicy",
-                    "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/DefaultPolicy",
+                    "path": "CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole/DefaultPolicy",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/DefaultPolicy/Resource",
+                        "path": "CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole/DefaultPolicy/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
                           "aws:cdk:cloudformation:props": {
@@ -411,10 +433,10 @@
                               ],
                               "Version": "2012-10-17"
                             },
-                            "policyName": "LambdaUploadServiceRoleDefaultPolicy04187ED8",
+                            "policyName": "LambdaCampaignServiceRoleDefaultPolicyCC514257",
                             "roles": [
                               {
-                                "Ref": "LambdaUploadServiceRole0D555F8C"
+                                "Ref": "LambdaCampaignServiceRole516D71E5"
                               }
                             ]
                           }
@@ -438,11 +460,11 @@
               },
               "Code": {
                 "id": "Code",
-                "path": "CampaignProducerForPinpointStack/LambdaUpload/Code",
+                "path": "CampaignProducerForPinpointStack/LambdaCampaign/Code",
                 "children": {
                   "Stage": {
                     "id": "Stage",
-                    "path": "CampaignProducerForPinpointStack/LambdaUpload/Code/Stage",
+                    "path": "CampaignProducerForPinpointStack/LambdaCampaign/Code/Stage",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.AssetStaging",
                       "version": "2.17.0"
@@ -450,7 +472,7 @@
                   },
                   "AssetBucket": {
                     "id": "AssetBucket",
-                    "path": "CampaignProducerForPinpointStack/LambdaUpload/Code/AssetBucket",
+                    "path": "CampaignProducerForPinpointStack/LambdaCampaign/Code/AssetBucket",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.BucketBase",
                       "version": "2.17.0"
@@ -464,7 +486,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "CampaignProducerForPinpointStack/LambdaUpload/Resource",
+                "path": "CampaignProducerForPinpointStack/LambdaCampaign/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
@@ -472,11 +494,11 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "3fb1d029cddc94f002acf2e3babb7fce96fe1255bd3436a309479340085e8331.zip"
+                      "s3Key": "6b0b650b00fd39af22c732928718e3edee3d78ce54fb9d0c9a32e2ee7a5968ed.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
-                        "LambdaUploadServiceRole0D555F8C",
+                        "LambdaCampaignServiceRole516D71E5",
                         "Arn"
                       ]
                     },
@@ -500,7 +522,12 @@
                             ]
                           ]
                         },
-                        "appId": "55051dd1160441c6b0fb74e358017939"
+                        "attrArn": {
+                          "Fn::GetAtt": [
+                            "PinPointCampaign",
+                            "Arn"
+                          ]
+                        }
                       }
                     },
                     "handler": "index.handler",
@@ -515,14 +542,14 @@
               },
               "InvokeServicePrincipal(apigateway.amazonaws.com)": {
                 "id": "InvokeServicePrincipal(apigateway.amazonaws.com)",
-                "path": "CampaignProducerForPinpointStack/LambdaUpload/InvokeServicePrincipal(apigateway.amazonaws.com)",
+                "path": "CampaignProducerForPinpointStack/LambdaCampaign/InvokeServicePrincipal(apigateway.amazonaws.com)",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                   "aws:cdk:cloudformation:props": {
                     "action": "lambda:InvokeFunction",
                     "functionName": {
                       "Fn::GetAtt": [
-                        "LambdaUploadB8A525B6",
+                        "LambdaCampaignFDC5C3B9",
                         "Arn"
                       ]
                     },
@@ -563,7 +590,7 @@
                     "policyName": "pinpointpolicy1DA39CD6",
                     "roles": [
                       {
-                        "Ref": "LambdaUploadServiceRole0D555F8C"
+                        "Ref": "LambdaCampaignServiceRole516D71E5"
                       }
                     ]
                   }
@@ -576,52 +603,6 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_iam.Policy",
-              "version": "2.17.0"
-            }
-          },
-          "PinPointCampaign": {
-            "id": "PinPointCampaign",
-            "path": "CampaignProducerForPinpointStack/PinPointCampaign",
-            "attributes": {
-              "aws:cdk:cloudformation:type": "AWS::Pinpoint::App",
-              "aws:cdk:cloudformation:props": {
-                "name": "pinpoint-project"
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_pinpoint.CfnApp",
-              "version": "2.17.0"
-            }
-          },
-          "pinpoint-projectID": {
-            "id": "pinpoint-projectID",
-            "path": "CampaignProducerForPinpointStack/pinpoint-projectID",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.17.0"
-            }
-          },
-          "pinpoint-logical ID": {
-            "id": "pinpoint-logical ID",
-            "path": "CampaignProducerForPinpointStack/pinpoint-logical ID",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.17.0"
-            }
-          },
-          "pinpoint-cfnOptions": {
-            "id": "pinpoint-cfnOptions",
-            "path": "CampaignProducerForPinpointStack/pinpoint-cfnOptions",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.17.0"
-            }
-          },
-          "pinpoint-cfnProperties": {
-            "id": "pinpoint-cfnProperties",
-            "path": "CampaignProducerForPinpointStack/pinpoint-cfnProperties",
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.17.0"
             }
           },
@@ -846,7 +827,7 @@
                           "format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
                         },
                         "deploymentId": {
-                          "Ref": "apipinpointDeployment2F246AF75dff1f33ef96f12fc8379c8a058a1bd5"
+                          "Ref": "apipinpointDeployment2F246AF71361933e47b196efce13caedeffcd0aa"
                         },
                         "stageName": "dev"
                       }
@@ -914,7 +895,7 @@
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "LambdaUploadB8A525B6",
+                                    "LambdaCampaignFDC5C3B9",
                                     "Arn"
                                   ]
                                 },
@@ -963,7 +944,7 @@
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "LambdaUploadB8A525B6",
+                                    "LambdaCampaignFDC5C3B9",
                                     "Arn"
                                   ]
                                 },
@@ -1030,7 +1011,7 @@
                                         ":lambda:path/2015-03-31/functions/",
                                         {
                                           "Fn::GetAtt": [
-                                            "LambdaUploadB8A525B6",
+                                            "LambdaCampaignFDC5C3B9",
                                             "Arn"
                                           ]
                                         },

@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/63d010872abd588a4ee9bc3dc17eb5816872557ce30a7e32739f3caf77a4a79e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/818b5c3c142c8e1cba24e999ecfba753981e4f99dfb7756a42e17810c61e1fa4.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -93,64 +93,46 @@
             "data": "distributionDomainName"
           }
         ],
-        "/CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaUploadServiceRole0D555F8C"
-          }
-        ],
-        "/CampaignProducerForPinpointStack/LambdaUpload/ServiceRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaUploadServiceRoleDefaultPolicy04187ED8"
-          }
-        ],
-        "/CampaignProducerForPinpointStack/LambdaUpload/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaUploadB8A525B6"
-          }
-        ],
-        "/CampaignProducerForPinpointStack/LambdaUpload/InvokeServicePrincipal(apigateway.amazonaws.com)": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaUploadInvokeServicePrincipalapigatewayamazonawscom12079830"
-          }
-        ],
-        "/CampaignProducerForPinpointStack/pinpoint-policy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "pinpointpolicy1DA39CD6"
-          }
-        ],
         "/CampaignProducerForPinpointStack/PinPointCampaign": [
           {
             "type": "aws:cdk:logicalId",
             "data": "PinPointCampaign"
           }
         ],
-        "/CampaignProducerForPinpointStack/pinpoint-projectID": [
+        "/CampaignProducerForPinpointStack/pinpoint-attrArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "pinpointprojectID"
+            "data": "pinpointattrArn"
           }
         ],
-        "/CampaignProducerForPinpointStack/pinpoint-logical ID": [
+        "/CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "pinpointlogicalID"
+            "data": "LambdaCampaignServiceRole516D71E5"
           }
         ],
-        "/CampaignProducerForPinpointStack/pinpoint-cfnOptions": [
+        "/CampaignProducerForPinpointStack/LambdaCampaign/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "pinpointcfnOptions"
+            "data": "LambdaCampaignServiceRoleDefaultPolicyCC514257"
           }
         ],
-        "/CampaignProducerForPinpointStack/pinpoint-cfnProperties": [
+        "/CampaignProducerForPinpointStack/LambdaCampaign/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "pinpointcfnProperties"
+            "data": "LambdaCampaignFDC5C3B9"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/LambdaCampaign/InvokeServicePrincipal(apigateway.amazonaws.com)": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaCampaignInvokeServicePrincipalapigatewayamazonawscomBCE7B634"
+          }
+        ],
+        "/CampaignProducerForPinpointStack/pinpoint-policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "pinpointpolicy1DA39CD6"
           }
         ],
         "/CampaignProducerForPinpointStack/AccessLogs/Resource": [
@@ -186,7 +168,7 @@
         "/CampaignProducerForPinpointStack/api-pinpoint/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "apipinpointDeployment2F246AF75dff1f33ef96f12fc8379c8a058a1bd5"
+            "data": "apipinpointDeployment2F246AF71361933e47b196efce13caedeffcd0aa"
           }
         ],
         "/CampaignProducerForPinpointStack/api-pinpoint/DeploymentStage.dev/Resource": [

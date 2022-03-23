@@ -46,8 +46,26 @@ export class CampaignProducerUsingPinpointStack extends Stack {
       description: 'The domain name of the Distribution',
     }); 
 
+    // pinpoint
+    const pinpointProject = new pinpoint.CfnApp(this, "PinPointCampaign", {
+      name: "pinpoint-project"
+    });
+
+    const attrArn = pinpointProject.attrArn;
+    new cdk.CfnOutput(this, 'pinpoint-attrArn', {
+      value: pinpointProject.attrArn,
+      description: 'The attrArn of the pinpoint',
+    });    
+
+  /*  const cfnEmailChannel = new pinpoint.CfnEmailChannel(this, 'MyCfnEmailChannel', {
+      applicationId: '7a283e241e2a4ea8a8eaf353169fb87c',
+      fromAddress: 'storytimebot21@gmail.com',
+      identity: 'arn:aws:ses:ap-northeast-1:xxxx:identity/storytimebot21@gmail.com',    
+      enabled: true,
+    }); */
+    
     // Lambda - Producer
-    const lambdaProducer = new lambda.Function(this, "LambdaUpload", {
+    const lambdaProducer = new lambda.Function(this, "LambdaCampaign", {
       runtime: lambda.Runtime.NODEJS_14_X, 
       code: lambda.Code.fromAsset("repository/lambda-producer"), 
       handler: "index.handler", 
@@ -55,7 +73,7 @@ export class CampaignProducerUsingPinpointStack extends Stack {
       environment: {
         bucket: s3Bucket.bucketName,
         CDN: 'https://'+distribution.domainName+'/',
-        appId: '55051dd1160441c6b0fb74e358017939'  // Project ID
+        attrArn: attrArn  // Project ID
       }
     });  
     s3Bucket.grantReadWrite(lambdaProducer);
@@ -71,30 +89,6 @@ export class CampaignProducerUsingPinpointStack extends Stack {
         statements: [pinpointPolicy],
       }),
     );
-
-    const pinpointProject = new pinpoint.CfnApp(this, "PinPointCampaign", {
-      name: "pinpoint-project"
-    });
-
-    new cdk.CfnOutput(this, 'pinpoint-projectID', {
-      value: pinpointProject.attrArn,
-      description: 'The Project ID of the pinpoint',
-    }); 
-
-    new cdk.CfnOutput(this, 'pinpoint-logical ID', {
-      value: pinpointProject.logicalId,
-      description: 'The logical ID of the pinpoint',
-    }); 
-
-    new cdk.CfnOutput(this, 'pinpoint-cfnOptions', {
-      value: JSON.stringify(pinpointProject.cfnOptions),
-      description: 'The cfnOptions of the pinpoint',
-    }); 
-
-    new cdk.CfnOutput(this, 'pinpoint-cfnProperties', {
-      value: JSON.stringify(pinpointProject.cfnProperties),
-      description: 'The cfnProperties of the pinpoint',
-    }); 
 
     // api Gateway
     const logGroup = new logs.LogGroup(this, 'AccessLogs', {
