@@ -36,7 +36,7 @@ API Gateway에서 500에러 발생시 [Troubleshoot](https://github.com/kyopark2
 
 ### API 정보
 
-관련 코드는 [Lambda-Producer](https://github.com/kyopark2014/lambda-producer)를 참고하시기 바랍니다.
+관련 코드는 [Lambda-Producer](https://github.com/kyopark2014/campaign-producer-for-pinpoint/blob/main/repository/lambda-producer/index.js)를 참고하시기 바랍니다.
 
 Lamda에 PinPoint Permission을 포함합니다. 
 
