@@ -149,7 +149,7 @@ Postman으로 API Gateway 주소에 api를 선택합니다. 입력되는 메시�
 
 ### Troubleshooting
 
-CDK에서 Email Channel을 아래와 같이 생성 가능합니다. 그런데 여기서 applicationId를 pinpointProject.attrArn의 뒤쪽 32자를 잘라서 사용하여야 하는데, 이 값은 Token(https://docs.aws.amazon.com/cdk/v2/guide/tokens.html)이라서 pinpoint에서 생성되기 전에는 알 수가 없습니다. 따라서, CDK에서 Email Channel을 아래처처럼 생성하려면 닭이냐 달걀이 먼저냐 하는 식의 문제가 되어 버립니다. 따라서 아래와 같이 CfnEmailChannel로 Email channel을 생성할 수 없습니다.
+CDK에서 Email Channel을 아래와 같이 생성 가능합니다. 그런데 여기서 applicationId를 pinpointProject.attrArn의 뒤쪽 32자를 잘라서 사용하여야 하는데, 이 값은 [Token](https://docs.aws.amazon.com/cdk/v2/guide/tokens.html)이라서 pinpoint에서 생성되기 전에는 알 수가 없습니다. 따라서, CDK에서 Email Channel을 아래처처럼 생성하려면 닭이냐 달걀이 먼저냐 하는 식의 문제가 되어 버립니다. 따라서 아래와 같이 CfnEmailChannel로 Email channel을 생성할 수 없습니다.
 
 ```java
     const pinpointProject = new pinpoint.CfnApp(this, "PinPointCampaign", {
