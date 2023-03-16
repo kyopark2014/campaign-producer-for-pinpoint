@@ -1,6 +1,6 @@
 # PinPoint를 이용한 Campaign 생성
 
-AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 여기에서는 AWS PinPoint를 이용하여 이메일 알림을 보내는것을 구현하고자 합니다. 전체 Architecture는 아래와 같습니다. 
+AWS PinPoint를 이용하여 이메일이나 SMS 알림을 보낼수 있습니다. 한국 리전에서는 SMS가 허용되지 않으므로, 이메일 알림을 보내는것을 구현하고자 합니다. 전체 Architecture는 아래와 같습니다. 
 
 <img width="586" alt="image" src="https://user-images.githubusercontent.com/52392004/159288376-d42cc6c2-5dc4-4662-b205-f08b5ace8782.png">
 
